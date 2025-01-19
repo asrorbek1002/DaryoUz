@@ -59,3 +59,4 @@ create_table()
 // Server Router
 app.use(require("./server/router/UserRouter"));
 app.use(require("./server/router/CategoryRouter"));
+app.use(require("./server/router/SubcategoryRouter"));
