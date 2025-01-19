@@ -1,54 +1,29 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+const connect = require("../utils/DatabaseConnect");
 
-const UserSchema = mongoose.Schema({
-    name: {
-        type: String, required: [true, "Enter your name"]
-    },
-    phone: {
-        type: String, required: [true, "Enter your phone"], unique: true // 998901299881
-    },
-    email: {
-        type: String, required: [true, "Enter your email address"], unique: true
-    },
-    order: {
-        type: Number, required: [true, "Enter your order"], unique: true
-    },
-    password: {
-        type: String, required: [true, "Enter your password"]
-    },
-    balance: {
-        type: Number, default: 0
-    },
-    role: {
-        type: String, required: [true, "Enter your role"], enum: ["admin", "user"]
-    },
-    tarif: {
-        type: String, enum: ["none", "vip"], default: "none"
-    },
-    deadline: {
-        type: String, default: "none" //  new Date().toISOString()
-    },
-    status: {
-        type: Boolean,
-        enum: [
-            true,   // faol
-            false,  // muzlatilgan
-        ],
-        default: true
-    },
-}, {
-    timestamps: true
-})
 
-UserSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) {
-        next();
-    }
-    const salt = await bcrypt.genSalt(12);
-    this.password = await bcrypt.hash(this.password, salt);
-});
+function CreatUserTable() {
+    const query = `
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,                  
+    name VARCHAR(255) NOT NULL,             
+    phone VARCHAR(15) UNIQUE,      
+    email VARCHAR(255) NOT NULL UNIQUE,     
+    order_id NUMERIC NOT NULL UNIQUE,        
+    password VARCHAR(255) NOT NULL,         
+    balance NUMERIC DEFAULT 0,              
+    role VARCHAR(50) NOT NULL CHECK (role IN ('admin', 'user')), 
+    tarif VARCHAR(50) DEFAULT 'none' CHECK (tarif IN ('none', 'vip')), 
+    deadline TIMESTAMP DEFAULT NULL,        
+    status BOOLEAN DEFAULT TRUE,            
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+);
+    `
+    connect.query(query)
+        .then(res => console.log("Table created"))
+        .catch(err => console.log(err))
+}
 
-module.exports = mongoose.model("user", UserSchema)
+module.exports = CreatUserTable;
 
 
