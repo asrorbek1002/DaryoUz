@@ -21,8 +21,4 @@ router.put("/api/category/:id", updatecategory)
 // @method: DELETE
 router.delete("/api/category/:id", deletecategory)
 
-
-
-
-
 module.exports = router;

@@ -20,10 +20,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
     `
     connect.query(query)
-        .then(res => console.log("Table created"))
+        .then(res => console.log("User table created"))
         .catch(err => console.log(err))
 }
 
 module.exports = CreatUserTable;
-
-

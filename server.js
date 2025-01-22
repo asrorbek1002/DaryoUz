@@ -60,3 +60,9 @@ create_table()
 app.use(require("./server/router/UserRouter"));
 app.use(require("./server/router/CategoryRouter"));
 app.use(require("./server/router/SubcategoryRouter"));
+app.use(require("./server/router/NewsRouter"));
+app.use(require("./server/router/CommentRouter"));
+app.use(require("./server/router/ReplycommentRouter"));
+app.use(require("./server/router/AdsRouter"));
+app.use(require("./server/router/ApplyRouter"));
+app.use(require("./server/router/ConfirmApplyRouter"));

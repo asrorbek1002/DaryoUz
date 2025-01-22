@@ -1,21 +1,23 @@
 const connection = require("../utils/DatabaseConnect");
 
-function CreateCommentTable() {
+function CreateReplaycommentTable() {
     const query = `
-        CREATE TABLE IF NOT EXISTS comments (
+        CREATE TABLE IF NOT EXISTS replaycomments (
             id SERIAL PRIMARY KEY,
-            news_id INT NOT NULL,
+            comment_id INT NOT NULL,
             user_id INT NOT NULL,
-            comment TEXT NOT NULL,
+            replay_comment TEXT NOT NULL,
             created_at TIMESTAMP DEFAULT NOW(),
             updated_at TIMESTAMP DEFAULT NOW(),
-            FOREIGN KEY (news_id) REFERENCES news(id),
+            status BOOLEAN DEFAULT true,
+            FOREIGN KEY (comment_id) REFERENCES comments(id),
             FOREIGN KEY (user_id) REFERENCES users(id)    
         );
     `
     connection.query(query)
-        .then(res => console.log("COMMENT Table created"))
+        .then(res => console.log("REPLYCOMMENT Table created"))
         .catch(err => console.log(err))
-};
+}
 
-module.exports = CreateCommentTable;
+module.exports = CreateReplaycommentTable;
+

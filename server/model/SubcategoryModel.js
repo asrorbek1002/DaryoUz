@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS subcategory (
     name_uz VARCHAR(255) NOT NULL,
     name_eng VARCHAR(255) NOT NULL,
     name_ru VARCHAR(255) NOT NULL,
-    status BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE
@@ -20,3 +19,5 @@ CREATE TABLE IF NOT EXISTS subcategory (
 }
 
 module.exports = CreateSubcategoryTable;
+
+

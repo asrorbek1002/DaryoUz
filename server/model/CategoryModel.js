@@ -13,8 +13,9 @@ CREATE TABLE IF NOT EXISTS category (
 );
     `;
     connect.query(query)
-        .then(res => console.log("Table created"))
+        .then(res => console.log("CATEGORY Table created"))
         .catch(err => console.log(err));
 }
 
 module.exports = CreatCategoryTable;
+
